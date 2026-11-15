@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#f2ecfb">
+<title>修整小屋 · 出发之前</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0;width:100%;min-height:100%;
+    font-family:"Yuanti SC","YouYuan","幼圆",system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    -webkit-user-select:none;user-select:none;overflow-x:hidden}
+  body{
+    --bg1:#f2ecfb;--bg2:#e6e8fa;--glow:rgba(190,170,245,.38);
+    --panel:rgba(255,255,255,.86);--line:rgba(232,184,210,.6);--ink:#5c4a63;--dim:#9c8aa8;--warm:#f3a7c1;
+    background:radial-gradient(900px 420px at 50% -8%,var(--glow),transparent 70%),
+      linear-gradient(175deg,var(--bg1),var(--bg2) 62%,#eaf0fc);
+    color:var(--ink);padding:calc(env(safe-area-inset-top) + 20px) 16px calc(env(safe-area-inset-bottom) + 28px);
+    min-height:100vh;position:relative}
+  body[data-part="dawn"]{--bg1:#fff1e9;--bg2:#fce6f0;--glow:rgba(255,190,175,.45)}
+  body[data-part="day"]{--bg1:#eaf6fc;--bg2:#eef1fc;--glow:rgba(168,214,246,.5)}
+  body[data-part="dusk"]{--bg1:#fff1e7;--bg2:#f8e5f0;--glow:rgba(255,178,158,.45)}
+  body[data-part="night"]{--bg1:#f2ecfb;--bg2:#e3e6fa;--glow:rgba(178,160,240,.42)}
+  .sky{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+  .sky i{position:absolute;font-style:normal;opacity:.75;animation:drift 9s ease-in-out infinite}
+  @keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+  .sky .s1{top:7%;left:7%;font-size:14px;color:#ffc5da}
+  .sky .s2{top:17%;right:8%;font-size:12px;color:#c6baf2;animation-delay:1.5s}
+  .sky .s3{top:48%;left:4%;font-size:11px;color:#ffd7a2;animation-delay:2.7s}
+  .sky .s4{top:70%;right:6%;font-size:13px;color:#b6e0cd;animation-delay:.9s}
+  .sky .s5{top:90%;left:10%;font-size:11px;color:#ffc5da;animation-delay:3.3s}
+  .wrap{max-width:420px;margin:0 auto;position:relative;z-index:1}
+  .head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+  .brand{font-size:16px;font-weight:800;letter-spacing:1px;color:#5c4a63}
+  .brand small{display:block;font-size:10.5px;font-weight:400;color:var(--dim);letter-spacing:0;margin-top:3px}
+  .now{font-size:10.5px;font-weight:700;color:#e08aad;background:rgba(255,255,255,.85);
+    border:1px solid var(--line);border-radius:99px;padding:6px 12px;white-space:nowrap;
+    box-shadow:0 4px 12px rgba(228,170,200,.18)}
+  .room{width:100%;border-radius:24px;overflow:hidden;border:3px solid rgba(255,255,255,.9);
+    box-shadow:0 14px 30px rgba(190,155,210,.25),inset 0 1px 0 #fff;position:relative;background:#f7eef6}
+  #sc{display:block;width:100%;height:auto;image-rendering:pixelated}
+  .room .cap{position:absolute;left:10px;bottom:9px;font-size:10px;color:#fff;
+    background:rgba(80,58,96,.62);border-radius:99px;padding:4px 10px}
+  .dlg{margin-top:14px;background:var(--panel);border:1px solid rgba(255,255,255,.95);border-radius:24px;
+    padding:16px 17px 17px;position:relative;
+    box-shadow:0 12px 28px rgba(200,165,210,.22),inset 0 1px 0 #fff}
+  .who{display:inline-block;font-size:10.5px;font-weight:800;color:#6b3c50;
+    background:linear-gradient(100deg,#ffd2e1,#ffe7d2);border-radius:99px;padding:4px 11px;
+    margin-bottom:11px;letter-spacing:.5px}
+  .txt{font-size:14.5px;line-height:1.85;min-height:52px;color:var(--ink)}
+  .txt b{color:#e387ab}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .chip{font:inherit;font-size:12.5px;color:var(--ink);background:rgba(255,255,255,.92);
+    border:1px solid var(--line);border-radius:99px;padding:8px 13px;cursor:pointer;
+    box-shadow:0 3px 9px rgba(220,180,205,.16);transition:background .12s,transform .12s}
+  .chip:active{background:#ffe4ee;transform:scale(.96)}
+  .type{display:flex;gap:8px;margin-top:12px}
+  .type input{flex:1;min-width:0;font:inherit;font-size:16px;color:var(--ink);background:rgba(255,255,255,.92);
+    border:1px solid var(--line);border-radius:14px;padding:10px 13px;outline:none}
+  .type input::placeholder{color:#b6a6bd}
+  .type input:focus{border-color:var(--warm);box-shadow:0 0 0 3px rgba(243,167,193,.2)}
+  .type button{font:inherit;font-size:13px;font-weight:800;color:#6b3c50;
+    background:linear-gradient(100deg,#ffc8dc,#ffe0c3);border:0;border-radius:14px;padding:0 17px;cursor:pointer;
+    box-shadow:0 4px 12px rgba(235,170,195,.3)}
+  .bless{display:none;margin-top:14px;background:linear-gradient(160deg,rgba(255,226,238,.95),rgba(238,230,252,.95));
+    border:1px solid rgba(255,255,255,.95);border-radius:20px;padding:15px 16px;
+    box-shadow:0 10px 24px rgba(210,175,215,.2)}
+  .bless .bl{font-size:11px;color:#e08aad;font-weight:800;letter-spacing:.5px}
+  .bless .bv{font-size:14px;line-height:1.75;margin-top:7px}
+  .bless .bv b{color:#e387ab}
+  .bless .bn{font-size:10.5px;color:var(--dim);margin-top:9px;line-height:1.7}
+  .later{margin-top:18px;border:1.5px dashed rgba(226,186,212,.8);border-radius:18px;padding:14px 15px;
+    background:rgba(255,255,255,.5)}
+  .later .lh{font-size:10.5px;color:var(--dim);margin-bottom:10px}
+  .later .li{display:inline-block;font-size:11px;color:#a08fae;background:rgba(255,255,255,.85);
+    border:1px solid rgba(235,205,222,.7);border-radius:99px;padding:6px 11px;margin:0 6px 6px 0}
+  .acts{display:flex;gap:10px;margin-top:18px}
+  .acts a{flex:1;text-align:center;text-decoration:none;font-size:13px;font-weight:800;border-radius:16px;padding:13px 4px}
+  .a1{background:linear-gradient(100deg,#ffc1d7,#ffdbc0);color:#6b3c50;
+    box-shadow:0 6px 16px rgba(235,165,195,.32)}
+  .a2{background:rgba(255,255,255,.9);color:var(--ink);border:1px solid var(--line)}
+  .foot{text-align:center;font-size:10px;color:#a897b5;line-height:1.95;margin-top:16px}
+  @media (prefers-reduced-motion:reduce){.sky i{animation:none}}
+</style>
+</head>
+<body data-part="night">
+<div class="sky" aria-hidden="true">
+  <i class="s1">✦</i><i class="s2">✧</i><i class="s3">✿</i><i class="s4">✦</i><i class="s5">❀</i>
+</div>
+<div class="wrap">
+  <div class="head">
+    <div class="brand">🕯 修整小屋<small>出发之前 · 先坐一会儿</small></div>
+    <div class="now" id="now">此刻</div>
+  </div>
+
+  <div class="room">
+    <canvas id="sc" width="160" height="112"></canvas>
+    <div class="cap" id="cap">灯还亮着</div>
+  </div>
+
+  <div class="dlg">
+    <span class="who">小屋</span>
+    <div class="txt" id="txt">欢迎回来～</div>
+    <div class="chips" id="chips"></div>
+    <div class="type">
+      <input id="inp" type="text" maxlength="40" placeholder="也可以自己写一句…">
+      <button id="send">发送</button>
+    </div>
+  </div>
+
+  <div class="bless" id="bless">
+    <div class="bl">✦ 今日已记下</div>
+    <div class="bv" id="bv"></div>
+    <div class="bn" id="bn"></div>
+  </div>
+
+  <div class="later">
+    <div class="lh">以后慢慢加（先留个位置）</div>
+    <span class="li">✎ 写日记</span><span class="li">☁ 看看天气</span>
+    <span class="li">🐣 养只小宠物</span><span class="li">🗓 翻翻以前的日子</span>
+  </div>
+
+  <div class="acts">
+    <a class="a2" id="home" href="index.html">回到入口</a>
+    <a class="a1" id="go" href="rpg.html">带着它出发 ›</a>
+  </div>
+  <p class="foot">小屋会认得你在大冒险里捏的小人 · 进度都存在这台手机里<br>不用打卡，漏一天也没关系</p>
+</div>
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  var q=location.search||'';
+  $('home').setAttribute('href','index.html'+q);
+  $('go').setAttribute('href','rpg.html'+q);
+
+  /* ---------- 现实时间 ---------- */
+  var d=new Date(),h=d.getHours();
+  var part,partName,greet,cap;
+  if(h>=5&&h<9){part='dawn';partName='清晨';greet='天刚亮，炉子还温着。这么早就来啦？';cap='窗外刚蒙蒙亮';}
+  else if(h>=9&&h<17){part='day';partName='白天';greet='欢迎回来～外面的光正好。';cap='阳光落在地板上';}
+  else if(h>=17&&h<21){part='dusk';partName='傍晚';greet='回来啦，天慢慢暗下来了，坐会儿吧。';cap='天边是橘色的';}
+  else{part='night';partName='夜晚';greet='还没睡呀？灯给你留着呢，别熬太晚。';cap='灯还亮着';}
+  document.body.setAttribute('data-part',part);
+  $('now').textContent=(h<10?'0':'')+h+':'+(d.getMinutes()<10?'0':'')+d.getMinutes()+' · '+partName;
+  $('cap').textContent=cap;
+
+  function pad(n){return n<10?'0'+n:''+n;}
+  var today=d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+
+  /* ---------- 读取大冒险的小人配色（联动：小屋认得你） ---------- */
+  var HAIRS=['#f5cf6a','#f7a8c8','#9fe0b8','#8fc4f5','#bda6ef','#c79a76','#e6ecf7','#5b5f84','#ffb07c','#8fdedb'];
+  var SKINS=['#ffe0c4','#f2c79c','#dca477','#b47d5c'];
+  var CLOTHS=['#7fc9a0','#7fb2ea','#f093a8','#f5d488','#b6a4ec','#f6ae7c'];
+  var hero={hair:HAIRS[0],skin:SKINS[0],cloth:CLOTHS[0],name:'小旅人',has:false};
+  try{
+    var raw=localStorage.getItem('pixel_rpg_v1');
+    if(raw){var s=JSON.parse(raw);if(s&&s.created){
+      hero.hair=HAIRS[s.hair]||HAIRS[0];hero.skin=SKINS[s.skin]||SKINS[0];
+      hero.cloth=CLOTHS[s.cloth]||CLOTHS[0];hero.name=s.name||'小旅人';hero.has=true;
+    }}
+  }catch(e){}
+
+  /* ---------- 画房间 ---------- */
+  var c=$('sc'),g=c.getContext('2d');g.imageSmoothingEnabled=false;
+  var PAL={
+    dawn:{wall:'#c9a884',floor:'#a9714b',sky1:'#f6b98a',sky2:'#fbd9a0',dark:.10},
+    day:{wall:'#dcc39c',floor:'#b27c50',sky1:'#8fc9ee',sky2:'#c6e8f7',dark:0},
+    dusk:{wall:'#b98f80',floor:'#8f5f4c',sky1:'#f0956a',sky2:'#f6c07e',dark:.14},
+    night:{wall:'#5a5278',floor:'#463a5e',sky1:'#1d2350',sky2:'#39406f',dark:.34}
+  };
+  function R(x,y,w,h,col){g.fillStyle=col;g.fillRect(x,y,w,h);}
+  var fr=0;
+  function draw(){
+    fr++;var P=PAL[part];
+    R(0,0,160,72,P.wall);
+    R(0,72,160,40,P.floor);
+    for(var i=0;i<9;i++)R(0,72+i*4+(i%2),160,1,part==='night'?'#3d3357':'#9c6a45');
+    /* 墙裙线 */
+    R(0,68,160,2,'rgba(0,0,0,.16)');
+    /* 窗 */
+    R(96,12,50,40,'#6b4830');R(99,15,44,34,P.sky1);
+    R(99,15,44,16,P.sky2);
+    if(part==='day'){R(107,22,10,3,'#ffffff');R(120,26,8,3,'#ffffff');R(132,20,3,3,'#ffe9a8');}
+    else if(part==='dusk'){R(103,30,40,2,'rgba(255,220,170,.5)');R(134,20,5,5,'#ffe0a0');}
+    else if(part==='dawn'){R(101,31,40,2,'rgba(255,240,210,.4)');R(136,19,5,5,'#fff0c0');}
+    else{for(var s=0;s<9;s++){var sx=101+((s*17)%40),sy=17+((s*11)%14);if((fr+s)%9<7)R(sx,sy,1,1,'#fff');}
+      R(132,19,6,6,'#f5e6a8');R(134,18,6,6,P.sky1);}
+    R(120,15,2,34,'#6b4830');R(99,30,44,2,'#6b4830');
+    R(94,52,54,3,'#57402e');
+    /* 壁炉 */
+    R(10,38,40,44,'#7c5140');
+    for(var b=0;b<5;b++)R(10,38+b*9+(b%2),40,1,'rgba(0,0,0,.15)');
+    R(16,50,28,30,'#2a1a20');
+    R(14,80,32,3,'#5b3a2c');
+    /* 炉火 */
+    var fl=3+(fr%3);
+    R(24,74-fl,4,fl+2,'#ff9a4d');R(29,72-fl,5,fl+4,'#ffca6a');R(34,74-fl,3,fl+2,'#ff9a4d');
+    R(28,76,6,3,'#fff0b0');
+    /* 桌上杯子 + 小灯 */
+    R(60,62,26,3,'#6b4830');R(62,65,3,14,'#5a3a28');R(81,65,3,14,'#5a3a28');
+    R(66,56,7,6,'#e8d7b8');R(67,54,5,2,'#fff2d8');
+    R(74,52,2,10,'#4a4030');R(71,49,8,4,'#ffd98a');
+    /* 地毯 */
+    R(52,94,58,12,part==='night'?'#6b4a72':'#b6605c');
+    R(55,96,52,8,part==='night'?'#7d5786':'#c9766f');
+    /* 坐着的像素小人（用大冒险的配色） */
+    var bx=76,by=76;
+    R(bx+2,by+16,12,7,hero.cloth);            // 身体
+    R(bx+3,by+22,4,3,'#4a568f');R(bx+9,by+22,4,3,'#4a568f');
+    R(bx,by+4,16,13,hero.skin);               // 脸
+    R(bx,by+2,16,5,hero.hair);R(bx,by+4,2,9,hero.hair);R(bx+14,by+4,2,9,hero.hair);
+    R(bx+3,by+10,2,2,'#3a3a5c');R(bx+11,by+10,2,2,'#3a3a5c');
+    R(bx+3,by+10,1,1,'#fff');R(bx+11,by+10,1,1,'#fff');
+    R(bx+1,by+13,3,1,'rgba(240,140,160,.7)');R(bx+12,by+13,3,1,'rgba(240,140,160,.7)');
+    /* 夜晚暖光晕 */
+    if(P.dark>0){
+      var lg=g.createRadialGradient(30,66,2,30,66,54);
+      lg.addColorStop(0,'rgba(255,180,100,'+(0.28*P.dark/0.34).toFixed(2)+')');
+      lg.addColorStop(1,'rgba(255,180,100,0)');g.fillStyle=lg;g.fillRect(0,20,90,92);
+      R(0,0,160,112,'rgba(24,26,70,'+P.dark+')');
+    }
+  }
+  draw();setInterval(draw,320);
+
+  /* ---------- 对话 ---------- */
+  var MOODS=[
+    {k:'happy',chip:'😊 挺开心的',re:['真好呀，这份高兴我替你收好了。','今天旅人出门，脚步都会轻一点。'],bless:'一份好心情'},
+    {k:'ok',chip:'🙂 还不错',re:['嗯嗯，平平顺顺的一天也很好。','把这点小确幸揣兜里吧。'],bless:'一点小确幸'},
+    {k:'tired',chip:'😮‍💨 有点累',re:['辛苦啦，先坐一会儿，火还暖着。','今天什么都不做，也完全可以。'],bless:'一个好好休息的许可'},
+    {k:'sad',chip:'😔 有点难过',re:['嗯，我在呢，慢慢说，不急。','难受的时候，不用急着让自己变好。'],bless:'一个不用逞强的拥抱'},
+    {k:'sick',chip:'🤒 不太舒服',re:['那更要歇着呀，水记得喝。','今天小屋不安排冒险，就陪你安静待着。'],bless:'一杯温水和慢慢来'},
+    {k:'anx',chip:'😣 有点烦',re:['先喝口热的，别急。','一件一件来就好，我陪着你。'],bless:'一次深呼吸'}
+  ];
+  function match(t){
+    t=(t||'').toLowerCase();
+    if(/难过|不开心|委屈|想哭|低落|伤心|emo|难受|哭|孤独|失恋/.test(t))return 'sad';
+    if(/发烧|感冒|生病|头痛|头疼|不舒服|头晕|着凉|咳嗽|难受死/.test(t))return 'sick';
+    if(/累|疲|困|熬夜|忙|倦|撑不住|没劲|虚/.test(t))return 'tired';
+    if(/烦|焦虑|压力|紧张|慌|急|崩溃|emo/.test(t))return 'anx';
+    if(/开心|高兴|快乐|不错|棒|哈哈|嘿嘿|爽|好耶|赞|喜欢|顺利|中奖/.test(t))return 'happy';
+    if(/还行|一般|平平|普通|没啥|凑合|还好/.test(t))return 'ok';
+    return 'talk';
+  }
+  function find(k){for(var i=0;i<MOODS.length;i++)if(MOODS[i].k===k)return MOODS[i];return null;}
+  var TALK={re:['嗯，我听着呢。','说不清也没关系，慢慢来。'],bless:'一句轻轻的问候'};
+
+  function respond(raw,forced){
+    var k=forced||match(raw),m=find(k)||TALK;
+    var label=raw&&raw.length<=16?raw:(m.chip?m.chip.replace(/^\S+\s/,''):'聊了两句');
+    var lines=m.re.slice();
+    if(hero.has)lines.push('（'+hero.name+'在旁边点了点头）');
+    $('txt').innerHTML=lines.map(function(s,i){return i===0?'<b>'+s+'</b>':s;}).join('<br>');
+    /* 写入共享存档：给大冒险预留的联动接口 */
+    var data={date:today,part:partName,mood:forced||k,label:label,bless:m.bless,hour:h,ts:Date.now()};
+    try{localStorage.setItem('pixel_hut_v1',JSON.stringify(data));}catch(e){}
+    $('bv').innerHTML='旅人今天带着 <b>「'+m.bless+'」</b> 出门。';
+    $('bn').textContent='这份心情已经记下，回到入口就能看见它跟着你。想改随时再跟我说一句就好～';
+    $('bless').style.display='block';
+    $('chips').style.display='none';$('send').parentNode.style.display='none';
+  }
+  /* 选项 */
+  var chips=$('chips');
+  MOODS.forEach(function(m){
+    var b=document.createElement('span');b.className='chip';b.textContent=m.chip;
+    b.onclick=function(){respond(m.chip.replace(/^\S+\s/,''),m.k);};chips.appendChild(b);
+  });
+  $('send').onclick=function(){var v=$('inp').value.trim();if(v)respond(v);};
+  $('inp').addEventListener('keydown',function(e){if(e.key==='Enter'){var v=$('inp').value.trim();if(v)respond(v);}});
+  /* 开场白 */
+  $('txt').innerHTML='<b>'+greet+'</b><br>今天过得怎么样呀？跟我说说～';
+
+  /* 今天已经聊过：不锁、不打卡，只轻轻提示 */
+  try{
+    var old=JSON.parse(localStorage.getItem('pixel_hut_v1'));
+    if(old&&old.date===today){
+      var tip=document.createElement('div');
+      tip.style.cssText='font-size:10.5px;color:var(--dim);margin-top:10px;line-height:1.6';
+      tip.textContent='（今天已经聊过啦 · 想改随时再说一句，不用勉强）';
+      $('txt').parentNode.appendChild(tip);
+    }
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
